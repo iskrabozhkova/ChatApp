@@ -1,8 +1,8 @@
-interface ObjectItem{
+export interface ObjectItem{
     name: string;
     email:string;
 }
-interface Object {
+export interface Object {
     isGroupChat: boolean;
     users: ObjectItem[];
     id: string;

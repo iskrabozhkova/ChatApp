@@ -1,15 +1,20 @@
 import express, {Request, Response, Application} from 'express'
 import chats  from "./data/data";
+const mongoose = require('mongoose');
+
+mongoose.connect('mongodb://localhost/chat', {useNewUrlParser: true});
+const db = mongoose.connection;
+db.on('open', ()=> console.log('Connected to database'))
 
 const app : Application = express();
     
 app.get('/', (req : Request, res : Response) => {
     res.send("Hello");
 })
-app.get('/api/chat', (req,res) => {
+app.get('/api/chats', (req,res) => {
     res.send(chats);
 })
-app.get('/api/chat/:id', (req,res) => {
+app.get('/api/chats/:id', (req,res) => {
     const chat = chats.find(c => c.id === req.params.id);
     res.send(chat);
 })
